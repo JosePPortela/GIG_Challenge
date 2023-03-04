@@ -33,6 +33,20 @@
 
 {% endif %}
 
+    {% set query %}
+        select  count(*)    as count_records
+        from   {{target_relation}}
+    {% endset %}
+
+
+    {% set results = run_query(query) %}
+
+        {% if execute %}
+             {% set table_records = results.columns[0].values()[0]|int %}
+        {% endif %}
+
+    {{log("RUN:{TABLE:'"~identifier~"',TOTAL:"~table_records~"}",info=True)}}
+
     {% call statement('main') -%}
         select 1
     {%- endcall %}
