@@ -40,3 +40,6 @@ from    {{source('imdb_dataset','raw_ratings')}} t1
 inner
 join    max_id
 on      t1.imdb_id = max_id.imdb_id
+where   day>=20230302
+
+{{ log("test",info=True) }}
