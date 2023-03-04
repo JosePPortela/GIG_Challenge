@@ -1,0 +1,18 @@
+
+
+version: 2
+
+sources:
+  - name: imdb_dataset
+    description: IMDB system and dataset
+    tables:
+      - name: raw_titles
+      - name: raw_ratings
+
+
+models:
+    - name: rfn_titles
+      description: Refined model with transformed data, regading titles
+      columns:
+          - name: imdb_id
+            description: ID that identifies TV show title      
