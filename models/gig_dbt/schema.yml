@@ -57,7 +57,7 @@ models:
             description: Average rating given by females between 18 and 29 years old
           - name: rating_females_30_44
             description: Average rating given by females between 30 and 44 years old
-          - name: rating_females_over 45
+          - name: rating_females_over_45
             description: Average rating given by females over 45 years old
           - name: rating_10
             description: Number of IMDB users who gave rating 10
