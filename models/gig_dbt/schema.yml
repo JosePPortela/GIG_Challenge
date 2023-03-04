@@ -47,7 +47,7 @@ models:
             description: Average rating given by males between 18 and 29 years old
           - name: rating_males_30_44
             description: Average rating given by males between 30 and 44 years old
-          - name: rating_males_over 45
+          - name: rating_males_over_45
             description: Average rating given by males over 45 years old
           - name: rating_females_all_ages
             description: Average rating given by females across all ages
