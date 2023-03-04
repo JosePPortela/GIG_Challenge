@@ -4,17 +4,11 @@
     )
 }}
 
-with max_id as 
-(
-select
-        imdb_id
-from    {{source('imdb_dataset','raw_ratings')}}
-where   day>=20230302
-)
 select  
         t1.imdb_id
         ,title_name
         ,cast(rating_males_all_ages as FLOAT64) as rating_males_all_ages
+        ,cast(rating_females_under_18 as FLOAT64) as rating_males_under_18
         ,cast(rating_males_18_29 as FLOAT64) as rating_males_18_29
         ,cast(rating_males_30_44 as FLOAT64) as rating_males_30_44
         ,cast(rating_males_over_45 as FLOAT64) as rating_males_over_45
@@ -37,9 +31,3 @@ select
         ,cast(`current_timestamp` as timestamp) as d_extract
         ,current_timestamp as refresh_dt
 from    {{source('imdb_dataset','raw_ratings')}} t1
-inner
-join    max_id
-on      t1.imdb_id = max_id.imdb_id
-where   day>=20230302
-
-{{ log("test",info=True) }}
