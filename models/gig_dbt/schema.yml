@@ -12,6 +12,8 @@ sources:
 models:
     - name: rfn_titles
       description: Refined model with transformed data, regading titles
+      tests:
+        - model_empty   
       columns:
           - name: imdb_id
             description: ID that identifies TV show title
@@ -20,74 +22,137 @@ models:
                 - not_null            
           - name: title_name
             description: Name of the TV show title
+            tests:
+                - not_null
+                - unique
+                    config:
+                      severity: warning                    
           - name: release_dt
             description: Release date of the TV show
           - name: genre_list
             description: List containing TV show's genres 
+            tests:
+                - not_null
           - name: d_extract
             description: Datetime of the extraction
+            tests:
+              - date_refreshness
+              - not_null
           - name: refresh_dt
             description: Datetime of the data's refresh
 
     - name: rfn_ratings
       description: Refined model with transformed data, regading the ratings given to the TV Show
+      tests:
+        - unique_combination:
+            combination_of_columns:      
+              - imdb_id
+              - d_extract
+        - model_empty                  
       columns:
           - name: imdb_id
             description: ID that identifies TV show title  
             tests:
-                - unique
-                - not_null                      
+                - not_null                
           - name: title_name
             description: Name of the TV show title
+            tests:
+                - not_null          
           - name: rating_males_all_ages
             description: Average rating given by males across all ages
+            tests:
+                - not_null
           - name: rating_males_under_18
             description: Average rating given by males under 18 years old
+            tests:
+                - not_null
           - name: rating_males_18_29
             description: Average rating given by males between 18 and 29 years old
+            tests:
+                - not_null
           - name: rating_males_30_44
             description: Average rating given by males between 30 and 44 years old
+            tests:
+                - not_null
           - name: rating_males_over_45
             description: Average rating given by males over 45 years old
+            tests:
+                - not_null
           - name: rating_females_all_ages
             description: Average rating given by females across all ages
+            tests:
+                - not_null
           - name: rating_females_under_18
             description: Average rating given by females under 18 years old
+            tests:
+                - not_null
           - name: rating_females_18_29
             description: Average rating given by females between 18 and 29 years old
+            tests:
+                - not_null
           - name: rating_females_30_44
             description: Average rating given by females between 30 and 44 years old
+            tests:
+                - not_null
           - name: rating_females_over_45
             description: Average rating given by females over 45 years old
+            tests:
+                - not_null
           - name: rating_10
             description: Number of IMDB users who gave rating 10
+            tests:
+                - not_null
           - name: rating_9
             description: Number of IMDB users who gave rating 9
+            tests:
+                - not_null
           - name: rating_8
             description: Number of IMDB users who gave rating 8
+            tests:
+                - not_null
           - name: rating_7
             description: Number of IMDB users who gave rating 7
+            tests:
+                - not_null
           - name: rating_6
             description: Number of IMDB users who gave rating 6
+            tests:
+                - not_null
           - name: rating_5
             description: Number of IMDB users who gave rating 5
+            tests:
+                - not_null
           - name: rating_4
             description: Number of IMDB users who gave rating 4
+            tests:
+                - not_null
           - name: rating_3
             description: Number of IMDB users who gave rating 3
+            tests:
+                - not_null
           - name: rating_2
             description: Number of IMDB users who gave rating 2
+            tests:
+                - not_null
           - name: rating_1
             description: Number of IMDB users who gave rating 1
+            tests:
+                - not_null
           - name: rank
             description: Rank of popularity associated with the TV show
+            tests:
+                - not_null            
           - name: d_extract
             description: Datetime of the extraction
+            tests:
+              - date_refreshness            
           - name: refresh_dt
             description: Datetime of the data's refresh            
 
     - name: rfn_titles_genre
       description: Refined model with the  genre breakdown by TV Show
+      tests:
+        - model_empty         
       columns:
           - name: imdb_id
             description: ID that identifies TV show title          
@@ -95,11 +160,15 @@ models:
                 - not_null                      
           - name: genre
             description: Genre of the TV Show
+            tests:
+                - not_null            
           - name: refresh_dt
             description: Datetime of the data's refresh  
 
     - name: rfn_rank_evolution
       description: Refined model with rank evolution across the days extracted
+      tests:
+        - model_empty         
       columns:
           - name: imdb_id
             description: ID that identifies TV show title          
@@ -107,6 +176,8 @@ models:
                 - not_null                      
           - name: rank
             description: Rank of popularity associated with the TV show
+            tests:
+                - not_null            
           - name: d_extract
             description: Datetime of the extraction
           - name: refresh_dt
@@ -114,6 +185,8 @@ models:
 
     - name: aug_titles_rank_evolution
       description: Augmented model with rank metrics analysis
+      tests:
+        - model_empty         
       columns:
           - name: imdb_id
             description: ID that identifies TV show title          
