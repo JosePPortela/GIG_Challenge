@@ -31,3 +31,4 @@ select
         ,cast(`current_timestamp` as timestamp) as d_extract
         ,current_timestamp as refresh_dt
 from    {{source('imdb_dataset','raw_ratings')}} t1
+where   day>=20230302

@@ -10,6 +10,7 @@ select
         imdb_id
         ,max(day) as day
 from    {{source('imdb_dataset','raw_titles')}}
+where   day>=20230302
 group
 by      imdb_id
 )
