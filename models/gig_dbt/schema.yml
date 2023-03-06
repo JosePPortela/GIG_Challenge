@@ -24,9 +24,9 @@ models:
             description: Name of the TV show title
             tests:
                 - not_null
-                - unique
+                - unique:
                     config:
-                      severity: warning                    
+                      severity: warn   
           - name: release_dt
             description: Release date of the TV show
           - name: genre_list
